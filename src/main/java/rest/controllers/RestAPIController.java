@@ -17,15 +17,7 @@ public class RestAPIController {
     CalculateService calculateService;
 
     @PostMapping (produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> send(@RequestBody String str){
+    public ResponseEntity<String> calcCharFreq(@RequestBody String str){
         return new ResponseEntity<>(calculateService.getCharFreqJSON(str), HttpStatus.OK);
     }
-
-
-    @GetMapping
-    public ResponseEntity<String> read(){
-        String str="ololo";
-        return new ResponseEntity<>(str, HttpStatus.OK);
-    }
-
 }
