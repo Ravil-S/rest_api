@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/github/Ravil-S/rest_api/graph/badge.svg?token=KWXT58NPPS)](https://codecov.io/github/Ravil-S/rest_api)
+
 1. Описание 
 
    Программа реализует rest api, вычисляющее частоту встречи символов по заданной строке. Результат отсортирован по убыванию количества вхождений символа в заданную строку.
