@@ -41,11 +41,22 @@ public class RestAPIControllerTest {
     @Test
     void calcCharFreq() throws Exception {
         String input = "text";
-        when(calculateService.getCharFreqJSON(input)).thenReturn("ok");
+        when(calculateService.getCharFreqJSON(input)).thenReturn("json");
         mockMvc.perform(post("/")
                 .contentType(MediaType.TEXT_PLAIN)
                 .content(input))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("ok"));
+                .andExpect(jsonPath("$").value("json"));
+    }
+
+    @Test
+    void badRequest() throws Exception {
+        String input = "void";
+        String output = null;
+        when(calculateService.getCharFreqJSON(input)).thenReturn(output);
+        mockMvc.perform(post("/")
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content(input))
+                .andExpect(status().isBadRequest());
     }
 }

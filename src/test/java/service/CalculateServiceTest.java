@@ -22,7 +22,7 @@ public class CalculateServiceTest {
     @Test
     void inputNull(){
         String input = null;
-        String output = "{\"error\":\"no string\"}";
+        String output = null;
 
         String json = calculateService.getCharFreqJSON(input);
         Assertions.assertEquals(output, json);
@@ -31,7 +31,7 @@ public class CalculateServiceTest {
     @Test
     void inputVoid(){
         String input = "";
-        String output = "{\"error\":\"no string\"}";
+        String output = null;
 
         String json = calculateService.getCharFreqJSON(input);
         Assertions.assertEquals(output, json);
@@ -41,7 +41,7 @@ public class CalculateServiceTest {
     void lenghtOver100(){
 
         String input = "a".repeat(101);
-        String output = "{\"error\":\"string length > 100\"}";
+        String output = null;
 
         String json = calculateService.getCharFreqJSON(input);
         Assertions.assertEquals(output, json);
