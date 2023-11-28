@@ -42,3 +42,9 @@
    Придет ответ:
 
    {"a":5,"c":4,"b":1}
+
+3. Прочее
+
+   SwaggerUI URL: http://localhost:8080/swagger-ui/index.html
+
+   OpenAPI URL: http://localhost:8080/v3/api-docs
