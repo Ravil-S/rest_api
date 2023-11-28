@@ -38,7 +38,7 @@ public class CalculateService {
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
             ObjectMapper objectMapper = new ObjectMapper();
-            String jacksonData = "{\"error\":\"no string\"}";
+            String jacksonData = null;
             try {
                 jacksonData = objectMapper.writeValueAsString(sortedMap);
             } catch (JsonProcessingException e) {
