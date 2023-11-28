@@ -6,7 +6,7 @@
   },
   "openapi": "3.0.1",
   "paths": {
-    "/map": {
+    "/": {
       "post": {
         "tags": [
           "rest-api-controller"
@@ -33,36 +33,6 @@
                     "type": "integer",
                     "format": "int64"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/": {
-      "post": {
-        "tags": [
-          "rest-api-controller"
-        ],
-        "operationId": "calcCharFreq",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
                 }
               }
             }
