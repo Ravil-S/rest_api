@@ -13,6 +13,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import rest.controllers.RestAPIController;
 import rest.service.CalculateService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -34,7 +37,6 @@ public class RestAPIControllerTest {
     void setUp(){
        mockMvc = MockMvcBuilders.standaloneSetup(restAPIController).build();
     }
-
 
     @Test
     void calcCharFreq() throws Exception {

@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,10 +15,9 @@ public class CalculateService {
 
     public String getCharFreqJSON(String text) {
 
-        if (text == null) return "{\"error\":\"no string\"}";
-        if (text.equals("")) return "{\"error\":\"no string\"}";
-
-        if (text.length()>100) return "{\"error\":\"string length > 100\"}";
+        if (text == null) return null;
+        if (text.equals("")) return null;
+        if (text.length()>100) return null;
 
             char[] chars = text.toCharArray();
 
@@ -41,7 +37,6 @@ public class CalculateService {
                     .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
-
             ObjectMapper objectMapper = new ObjectMapper();
             String jacksonData = "{\"error\":\"no string\"}";
             try {
@@ -50,7 +45,5 @@ public class CalculateService {
                 e.printStackTrace();
             }
             return jacksonData;
-
     }
-
 }

@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rest.service.CalculateService;
 
+import java.util.Collection;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/")
 @AllArgsConstructor
@@ -18,6 +21,8 @@ public class RestAPIController {
 
     @PostMapping (produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> calcCharFreq(@RequestBody String str){
-        return new ResponseEntity<>(calculateService.getCharFreqJSON(str), HttpStatus.OK);
+        String json = calculateService.getCharFreqJSON(str);
+        if (json != null) return new ResponseEntity<>(json, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
