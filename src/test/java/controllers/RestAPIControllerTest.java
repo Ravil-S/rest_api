@@ -1,5 +1,7 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,9 +54,34 @@ public class RestAPIControllerTest {
     @Test
     void badRequest() throws Exception {
         String input = "void";
-        String output = null;
-        when(calculateService.getCharFreqJSON(input)).thenReturn(output);
+
+        when(calculateService.getCharFreqJSON(input)).thenReturn(null);
         mockMvc.perform(post("/")
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content(input))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void calcCharFreqMap() throws Exception {
+        String input = "text";
+        Map<Character, Long> output = new HashMap<>();
+        output.put('f', 5L);
+
+        when(calculateService.getCharFreqMap(input)).thenReturn(output);
+        mockMvc.perform(post("/map")
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content(input))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.f").value("5"));
+    }
+
+    @Test
+    void badRequestMap() throws Exception {
+        String input = "void";
+
+        when(calculateService.getCharFreqMap(input)).thenReturn(null);
+        mockMvc.perform(post("/map")
                         .contentType(MediaType.TEXT_PLAIN)
                         .content(input))
                 .andExpect(status().isBadRequest());

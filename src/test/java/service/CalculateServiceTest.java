@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import rest.service.CalculateService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CalculateServiceTest {
 
     private CalculateService calculateService = new CalculateService();
@@ -46,4 +49,47 @@ public class CalculateServiceTest {
         String json = calculateService.getCharFreqJSON(input);
         Assertions.assertEquals(output, json);
     }
+
+    //////// map ///////
+
+    @Test
+    void getCharFreqMap(){
+        String input = "fffffzzz";
+        Map<Character, Long> output = new HashMap<>();
+        output.put('f', 5L);
+        output.put('z', 3L);
+
+        Map<Character, Long> map = calculateService.getCharFreqMap(input);
+        Assertions.assertEquals(output, map);
+    }
+
+    @Test
+    void inputNullMap(){
+        String input = null;
+        Map<Character, Long> output = null;
+
+        Map<Character, Long> map = calculateService.getCharFreqMap(input);
+        Assertions.assertEquals(output, map);
+    }
+
+    @Test
+    void inputVoidMap(){
+        String input = "";
+        Map<Character, Long> output = null;
+
+        Map<Character, Long> map = calculateService.getCharFreqMap(input);
+        Assertions.assertEquals(output, map);
+    }
+
+    @Test
+    void lenghtOver100Map(){
+
+        String input = "a".repeat(101);
+        Map<Character, Long> output = null;
+
+        Map<Character, Long> map = calculateService.getCharFreqMap(input);
+        Assertions.assertEquals(output, map);
+    }
+
+
 }

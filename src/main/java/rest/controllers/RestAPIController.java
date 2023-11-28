@@ -25,4 +25,11 @@ public class RestAPIController {
         if (json != null) return new ResponseEntity<>(json, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping (value = "/map", produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<Map<Character, Long>> calcCharFreqMap(@RequestBody String str){
+        Map<Character, Long> json = calculateService.getCharFreqMap(str);
+        if (json != null) return new ResponseEntity<>(json, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

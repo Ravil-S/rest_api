@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @NoArgsConstructor
@@ -45,5 +44,31 @@ public class CalculateService {
                 e.printStackTrace();
             }
             return jacksonData;
+    }
+
+    public Map<Character, Long> getCharFreqMap(String text) {
+
+        if (text == null) return null;
+        if (text.equals("")) return null;
+        if (text.length()>100) return null;
+
+        char[] chars = text.toCharArray();
+
+        HashMap<Character, Long> hashMap = new LinkedHashMap<>();
+
+        for (char ch : chars) {
+            if (!hashMap.isEmpty()) {
+                if (hashMap.containsKey(ch)) {
+                    hashMap.replace(ch, hashMap.get(ch) + 1);
+                    continue;
+                }
+            }
+            hashMap.put(ch, 1L);
+        }
+
+        Map<Character, Long> sortedMap = hashMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return sortedMap;
     }
 }
