@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,9 +8,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import rest.controllers.RestAPIController;
+import rest.controller.RestAPIController;
 import rest.service.CalculateService;
 
 import java.util.HashMap;
@@ -39,21 +38,24 @@ public class RestAPIControllerTest {
     }
 
     @Test
-    void calcCharFreq() throws Exception {
+    void calcCharFreqMap() throws Exception {
         String input = "text";
-        when(calculateService.getCharFreqJSON(input)).thenReturn("json");
+        Map<String, Long> output = new HashMap<>();
+        output.put("f", 5L);
+
+        when(calculateService.getCharFreqMap(input)).thenReturn(output);
         mockMvc.perform(post("/")
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(input))
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content(input))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("json"));
+                .andExpect(jsonPath("$.f").value("5"));
     }
 
     @Test
-    void badRequest() throws Exception {
+    void badRequestMap() throws Exception {
         String input = "void";
-        String output = null;
-        when(calculateService.getCharFreqJSON(input)).thenReturn(output);
+
+        when(calculateService.getCharFreqMap(input)).thenReturn(null);
         mockMvc.perform(post("/")
                         .contentType(MediaType.TEXT_PLAIN)
                         .content(input))
