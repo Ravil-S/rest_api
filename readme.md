@@ -52,7 +52,7 @@
 
    Запуск контейнера:
 
-   docker run -it restapi -p 8080:8080
+   docker run -p 8080:8080 restapi
 
 5. Прочее
 
