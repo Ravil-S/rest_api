@@ -48,7 +48,7 @@
 
    Создание образа:
 
-   mvn clear compile jib:dockerBuild
+   mvn clean compile jib:dockerBuild
 
    Запуск контейнера:
 
