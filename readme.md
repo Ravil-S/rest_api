@@ -43,7 +43,18 @@
 
    {"a":5,"c":4,"b":1}
 
-3. Прочее
+
+3. Docker
+
+   Создание образа:
+
+   mvn clear compile jib:dockerBuild
+
+   Запуск контейнера:
+
+   docker run -it restapi -p 8080:8080
+
+5. Прочее
 
    SwaggerUI URL: http://localhost:8080/swagger-ui/index.html
 
