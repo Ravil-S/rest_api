@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import rest.service.CalculateService;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,42 +15,39 @@ public class CalculateServiceTest {
 
     @Test
     void getCharFreqMap(){
-        String input = "fffffzzz";
+        String input = "aazzzfff";
         Map<String, Long> output = new HashMap<>();
-        output.put("f", 5L);
+        output.put("a", 2L);
         output.put("z", 3L);
+        output.put("f", 3L);
 
         Map<String, Long> map = calculateService.getCharFreqMap(input);
         Assertions.assertEquals(output, map);
     }
 
     @Test
-    void inputNullMap(){
+    void inputNull(){
         String input = null;
-        Map<String, Long> output = null;
+        Map<String, Long> output = Collections.emptyMap();
 
         Map<String, Long> map = calculateService.getCharFreqMap(input);
         Assertions.assertEquals(output, map);
     }
 
     @Test
-    void inputVoidMap(){
+    void inputVoid(){
         String input = "";
-        Map<String, Long> output = null;
+        Map<String, Long> output = Collections.emptyMap();
 
         Map<String, Long> map = calculateService.getCharFreqMap(input);
         Assertions.assertEquals(output, map);
     }
 
     @Test
-    void lenghtOver100Map(){
+    void lengthOverMax(){
 
-        String input = "a".repeat(101);
-        Map<String, Long> output = null;
+        String input = "a".repeat(10_001);
 
-        Map<String, Long> map = calculateService.getCharFreqMap(input);
-        Assertions.assertEquals(output, map);
+        Assertions.assertThrows(IllegalArgumentException.class, ()->calculateService.getCharFreqMap(input));
     }
-
-
 }
