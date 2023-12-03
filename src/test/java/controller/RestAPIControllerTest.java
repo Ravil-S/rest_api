@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import rest.controller.RestAPIController;
 import rest.service.CalculateService;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class RestAPIControllerTest {
     void badRequestMap() throws Exception {
         String input = "void";
 
-        when(calculateService.getCharFreqMap(input)).thenReturn(null);
+        when(calculateService.getCharFreqMap(input)).thenReturn( Collections.emptyMap());
         mockMvc.perform(post("/")
                         .contentType(MediaType.TEXT_PLAIN)
                         .content(input))
